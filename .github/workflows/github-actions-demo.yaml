@@ -2,6 +2,8 @@ name: Node.js CI/CD
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
@@ -17,9 +19,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn test
+      - run: echo "event_name - ${{ github.event_name }}"
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
