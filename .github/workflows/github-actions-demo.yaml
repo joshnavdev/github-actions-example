@@ -21,6 +21,9 @@ jobs:
       - run: yarn test
   deploy:
     needs: build
+    on:
+      push:
+        branches: [main]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
