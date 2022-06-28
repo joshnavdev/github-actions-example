@@ -23,7 +23,7 @@ jobs:
       - name: List buckets
         run: aws s3 ls
       - name: S3 sync
-        run: aws sync --delete ./ s3://chatbot-a1w/
+        run: aws s3 sync --delete ./ s3://chatbot-a1w/
       # - name: Use Node.js ${{ matrix.node-version }}
         # uses: actions/setup-node@v2
         # with:
